@@ -13,6 +13,8 @@ BLOG地址：https://blog.csdn.net/u013700502/article/details/79748829
 ![UML时序图.png](https://upload-images.jianshu.io/upload_images/587163-2e0308c1dc5faaab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 # How to use
+推荐gradle4.1
+
 1、权限库引入方式，在app模块的build.gradle中引入如下：
 ```
 apply plugin: 'android-aspectjx'
@@ -27,6 +29,9 @@ dependencies {
 dependencies {
     classpath 'com.android.tools.build:gradle:2.3.3'
     classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:1.0.8'
+     //添加下面这行代码就OK了
+    classpath 'com.novoda:bintray-release:0.3.4'
+    //   classpath 'com.novoda:bintray-release:0.5.0'
     ................其他................
 }
 ```
@@ -46,7 +51,17 @@ public class A {
 
 -keep class com.hujiang.test {*;}
 ```
-
+4.在build.gradle(Moudle)中添加
+```
+dependencies {
+    implementation project(':permissionlib')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    }
+```
+5.settings.gradle中
+```
+include':app', ':permissionlib'
+```
 ## 申请单个权限
 申请单个权限：
 ```
